@@ -16,7 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from zeus_app.views import show_main_page, show_trainings, show_bookings, show_booking_rules
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', show_main_page),
+    path('bookings/', show_bookings),
+    path('trainings/', show_trainings),
+    path('booking_rules', show_booking_rules),
+
 ]
