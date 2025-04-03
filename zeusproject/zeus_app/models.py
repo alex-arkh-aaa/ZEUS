@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 
 # Create your models here.
 
-# class User(models.Model):
-#     name = models.CharField(max_length=20, validators=[MinLengthValidator(3)]),
-#     last_name = models.CharField(max_length=20, validators=[MinLengthValidator(3)]),
+class User(models.Model):
+    name = models.CharField(max_length=20),
+    last_name = models.CharField(max_length=20),
+    

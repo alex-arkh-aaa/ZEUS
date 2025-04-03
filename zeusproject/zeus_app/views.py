@@ -13,8 +13,6 @@ def show_trainings(request):
 
 
 def show_bookings(request):
-    print('Была открыта bookings')
-    print(request.__dict__)
     return render(request, 'bookings.html')
 
 
