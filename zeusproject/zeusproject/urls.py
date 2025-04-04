@@ -15,9 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from xml.etree.ElementInclude import include
+#django_auth/urls.py
 
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings  # Импортируем настройки проекта
+from django.conf.urls.static import static  # Импортируем функцию static для работы со статическими файлами
+
 from zeus_app.views import show_main_page, show_trainings, show_bookings, show_booking_rules
 
 urlpatterns = [
@@ -26,6 +30,14 @@ urlpatterns = [
     path('bookings/', show_bookings),
     path('trainings/', show_trainings),
     path('booking_rules', show_booking_rules),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('user/', include('users.urls', namespace='users'))
 
 ]
+
+if settings.DEBUG:  # Если включен режим отладки (DEBUG=True)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # Добавляем URL-адреса для медиа-файлов
+
+# Serve static files during development (alternative way)
+if settings.DEBUG:
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    urlpatterns += staticfiles_urlpatterns()

@@ -71,7 +71,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'zeusproject.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -113,6 +112,9 @@ USE_I18N = True
 
 USE_TZ = True
 
+LOGIN_REDIRECT_URL = 'home'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
