@@ -29,7 +29,7 @@ urlpatterns = [
     path('', show_main_page),
     path('bookings/', show_bookings),
     path('trainings/', show_trainings),
-    path('booking_rules', show_booking_rules),
+    path('booking_rules/', show_booking_rules),
     path('user/', include('users.urls', namespace='users'))
 
 ]

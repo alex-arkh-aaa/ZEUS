@@ -1,17 +1,19 @@
 # Import necessary modules and models
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import *
 
 
 # Define a view function for the home page
+@login_required  # Добавляем декоратор для защиты страницы
 def home(request):
     return render(request, 'zeus_app/main_page.html')
 
 
+# Define a view function for the login page
 # Define a view function for the login page
 def login_page(request):
     # Check if the HTTP request method is POST (form submission)
@@ -19,29 +21,23 @@ def login_page(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        # Check if a user with the provided username exists
-        if not User.objects.filter(username=username).exists():
-            # Display an error message if the username does not exist
-            messages.error(request, 'Invalid Username')
-            return redirect('http://127.0.0.1:8000/user/login/')
-
         # Authenticate the user with the provided username and password
-        user = authenticate(username=username, password=password)
+        user = authenticate(request, username=username, password=password)
 
-        if user is None:
-            # Display an error message if authentication fails (invalid password)
-            messages.error(request, "Invalid Password")
-            return redirect('http://127.0.0.1:8000/user/login/')
-        else:
+        if user is not None:
             # Log in the user and redirect to the home page upon successful login
             login(request, user)
             return redirect('http://127.0.0.1:8000/')
+        else:
+            # Display an error message if authentication fails (invalid password)
+            messages.error(request, "Invalid username or password") # Общее сообщение об ошибке
+            return redirect('http://127.0.0.1:8000/user/login/')
 
     # Render the login page template (GET request)
     return render(request, 'users/login.html')
 
 
-# Define a view function for the registration page
+
 def register_page(request):
     # Check if the HTTP request method is POST (form submission)
     if request.method == 'POST':
@@ -50,10 +46,8 @@ def register_page(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        # Check if a user with the provided username already exists
-        user = User.objects.filter(username=username)
-
-        if user.exists():
+        # Check if username exists before creating user
+        if User.objects.filter(username=username).exists():  # Упрощаем проверку
             # Display an information message if the username is taken
             messages.info(request, "Username already taken!")
             return redirect('/user/register/')
@@ -65,18 +59,17 @@ def register_page(request):
             username=username
         )
 
-        # Set the user's password and save the user object
         user.set_password(password)
         user.save()
 
-        # Display an information message indicating successful account creation
-        messages.info(request, "Account created Successfully!")
-        return redirect('/user/register/')
+        messages.success(request, "Account created Successfully! You can now login.")  # Меняем сообщение
+        return redirect('/user/login/')  # Перенаправляем на страницу входа
 
     # Render the registration page template (GET request)
     return render(request, 'users/register.html')
 
 
 def logoutUser(request):
+    logout(request) # Выходим из системы
+    return redirect('/')  # Redirect to the main page after logout
 
-    return render(request, 'main_page.html')

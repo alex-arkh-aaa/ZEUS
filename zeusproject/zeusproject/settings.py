@@ -112,6 +112,10 @@ USE_I18N = True
 
 USE_TZ = True
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Хранение в базе данных
+
+SESSION_COOKIE_AGE = 3600  # 1 час
+
 LOGIN_REDIRECT_URL = 'home'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
