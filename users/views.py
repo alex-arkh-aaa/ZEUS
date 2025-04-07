@@ -7,14 +7,11 @@ from django.contrib.auth.models import User
 from .models import *
 
 
-# Define a view function for the home page
-@login_required  # Добавляем декоратор для защиты страницы
+@login_required
 def home(request):
     return render(request, 'zeus_app/main_page.html')
 
 
-# Define a view function for the login page
-# Define a view function for the login page
 def login_page(request):
     # Check if the HTTP request method is POST (form submission)
     if request.method == "POST":

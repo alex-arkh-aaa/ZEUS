@@ -7,13 +7,19 @@
 	      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	{% load static %}
 
+	<link rel="icon" href="{% static 'favicon/favicon.ico' %}" sizes="any">
+	<link rel="icon" href="{% static 'favicon/favicon.svg' %}" type="image/svg+xml">
+	<link rel="apple-touch-icon" href="{% static 'favicon/apple-touch-icon.png' %}">
+	<link rel="icon" type="image/png" href="{% static 'favicon/favicon-96x96.png' %}" sizes="96x96">
+	<link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
+	<link rel="icon" type="image/png" href="{% static 'favicon/web-app-manifest-192.png' %}" sizes="192x192">
+	<link rel="icon" type="image/png" href="{% static 'favicon/web-app-manifest-512.png' %}" sizes="512x512">
+
 	<title>Registration Form</title>
 </head>
 <body>
 <div class="container mt-5">
-	<!-- Registration form -->
 	<form class="col-4 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
-
 		<div style="margin: 0 auto">
 			<img style="border-radius: 15px; display: inline-block; vertical-align: middle"
 			     src="{% static 'img/zeus_logo.jpg' %}"
@@ -21,12 +27,9 @@
 			<h2 style="display: inline-block; vertical-align: middle">ZEUS</h2>
 		</div>
 		{% csrf_token %}  <!-- CSRF token for security -->
-
-		<!-- Registration form heading -->
 		<h3>Register</h3>
 		<hr>
-
-		<!-- Display error/success messages -->
+		
 		{% if messages %}
 		<ul class="messages">
 			{% for message in messages %}
