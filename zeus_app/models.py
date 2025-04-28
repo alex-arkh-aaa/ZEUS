@@ -19,3 +19,4 @@ class Comment(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default=-1)
     rating_value = models.IntegerField(choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')])
     text = models.TextField(help_text='Напишите свой комментарий, пожалуйста!', )
+    created_at = models.DateTimeField(auto_now=True)

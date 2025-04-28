@@ -20,14 +20,14 @@
 <body>
 <div class="container mt-5">
 	<form class="col-4 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
-		<div style="margin: 0 auto">
+		<div style="margin: 0 auto;padding-bottom: 20px;">
 			<img style="border-radius: 15px; display: inline-block; vertical-align: middle"
 			     src="{% static 'img/zeus_logo.jpg' %}"
 			     width="40px" height="40px">
 			<h2 style="display: inline-block; vertical-align: middle">ZEUS</h2>
 		</div>
 		{% csrf_token %}  <!-- CSRF token for security -->
-		<h3>Register</h3>
+		<h3>Регистрация</h3>
 		<hr>
 		
 		{% if messages %}
