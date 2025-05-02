@@ -1,8 +1,17 @@
 {% extends "base.html" %}
 {% block title %}О центре{% endblock title %}
 {% block links %}<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">{% endblock links %}
+{% load static %}
 
 {% block main%}
+
+<div class="row justify-content-center">
+	<div class="col-12 col-md-11" style="padding: 10px;">
+		<img style="border-radius: 45px; width: 100%; height: auto; display: block; margin: 0 auto;"
+		     src="{% static 'img/main_photo.jpg' %}" alt="Описание">
+	</div>
+</div>
+
 <div class="comments-container">
     <h1>Комментарии</h1>
     <div style="max-height: 500px; overflow-y: auto;">
