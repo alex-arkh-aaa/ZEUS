@@ -39,36 +39,36 @@
     {% if request.user.is_authenticated %}
     <form method="post" action="/" id="commentForm">  <!-- Добавили id -->
         {% csrf_token %}
-        <div>
+        <div style="margin-bottom: 20px;">
           <div class="form-check-inline">
-            <label for="rating">Оценка:</label>
+            <label for="rating" style="font-size: 20px;">Оценка:</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="rating_value" id="inlineRadio1" value="1">
+            <input class="form-check-input" type="radio" name="rating_value" id="inlineRadio1" value="1" style="padding: 8px;">
             <label class="form-check-label" for="inlineRadio1">1</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="rating_value" id="inlineRadio2" value="2">
+            <input class="form-check-input" type="radio" name="rating_value" id="inlineRadio2" value="2" style="padding: 8px;">
             <label class="form-check-label" for="inlineRadio2">2</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="rating_value" id="inlineRadio3" value="3">
+            <input class="form-check-input" type="radio" name="rating_value" id="inlineRadio3" value="3" style="padding: 8px;"> 
             <label class="form-check-label" for="inlineRadio3">3</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="rating_value" id="inlineRadio4" value="4">
+            <input class="form-check-input" type="radio" name="rating_value" id="inlineRadio4" value="4" style="padding: 8px;">
             <label class="form-check-label" for="inlineRadio4">4</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="rating_value" id="inlineRadio5" value="5">
+            <input class="form-check-input" type="radio" name="rating_value" id="inlineRadio5" value="5" style="padding: 8px;">
             <label class="form-check-label" for="inlineRadio5">5</label>
           </div>
         </div>
       
         <div style="display: flex; align-items: center;">
-          <label style="margin-right: 10px;" for="comment">Ваш комментарий:</label>
-          <textarea id="comment" name="comment" rows="2" cols="50"></textarea>
+          <label style="margin-right: 10px; font-size: 20px;" for="comment">Ваш комментарий:</label>
         </div>
+        <textarea class="text_area" id="comment" name="comment" rows="3" cols="100"></textarea>
         <div id="errorMessage" style="color: red;"></div>  <!-- Место для сообщений об ошибках -->
         <input type="submit" value="Send"/>
       </form>
@@ -190,6 +190,13 @@
 
   .comment-rating .star.filled {
     color: #ffc107; /* Цвет заполненных звезд (золотой) */
+  }
+
+  .text_area {
+    border-radius: 8px;
+  background-color: #f8f8f8;
+  resize: none;
+  padding: 8px;
   }
 
   
