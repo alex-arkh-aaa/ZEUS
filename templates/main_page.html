@@ -13,7 +13,11 @@
 </div>
 
 <div class="comments-container">
-    <h1>Комментарии</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>Отзывы о ZEUS</h2>
+        <h5 style="text-align: right; margin: 0;">Всего отзывов: {{ comments|length }}</h5>
+      </div>
+    
     <div style="max-height: 500px; overflow-y: auto;">
         {% for comment in comments|dictsortreversed:"created_at" %}
     <div class="comment-card rounded-shadow">
@@ -35,7 +39,7 @@
 {% endfor %}
     </div>
     <div class="post-comment" style="margin-top: 20px;">
-    <h3 style="margin-bottom: 20px;">Оставь свой комментарий!</h3>
+    <h3 style="margin-bottom: 20px;">Оставь свой отзыв!</h3>
     {% if request.user.is_authenticated %}
     <form method="post" action="/" id="commentForm">  <!-- Добавили id -->
         {% csrf_token %}

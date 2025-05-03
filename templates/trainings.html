@@ -1,2 +1,38 @@
 {% extends "base.html" %}
 {% block title %}Тренировки{% endblock title %}
+{% load static %}
+
+{% block main%}
+<h1 class="centered-title" style="max-width: 660px; text-align: center; background: black;border-radius: 100px;margin: 10px auto;padding-block: 19px; color: white;">Школа пляжного волейбола «ЗЕВС»</h1>
+
+
+<div class="row justify-content-center">
+		<img style="width: 100%; height: auto; display: block; margin: 0 auto;"
+		     src="{% static 'img/main_photo.jpg' %}" alt="Описание">
+</div>
+
+
+<h2 style="text-align: center;
+margin-block: 60px 10px;
+margin-inline: 220px;
+line-height: 45px;
+font-weight: normal;">Вы давно мечтаете научиться владеть волейбольным мячом на песке или чувствуете, что необходимо подтянуть конкретные элементы?
+	Что если мы предложим вам не только возможность окунуться в захватывающий вид спорта - пляжный воллейбол, но и научим как получать удовольствие от игры?</h2>
+
+<p style="text-align: center;
+margin-inline: 140px;
+line-height: 45px;
+margin-bottom: 35px;
+font-size: 16px;">- ZEUS</p>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock main%}
