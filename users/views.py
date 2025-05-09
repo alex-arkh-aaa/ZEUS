@@ -40,6 +40,7 @@ def register_page(request):
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
+        email = request.POst.get('email')
         username = request.POST.get('username')
         password = request.POST.get('password')
 
@@ -53,7 +54,8 @@ def register_page(request):
         user = User.objects.create_user(
             first_name=first_name,
             last_name=last_name,
-            username=username
+            username=username,
+            email=email
         )
 
         user.set_password(password)

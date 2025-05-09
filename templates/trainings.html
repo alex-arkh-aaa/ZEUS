@@ -25,12 +25,73 @@ line-height: 45px;
 margin-bottom: 35px;
 font-size: 16px;">- ZEUS</p>
 
+<h2 style="text-align: center;
+margin-block: 60px 40px;
+margin-inline: 180px;
+line-height: 45px;
+font-weight:bold;">Центр Пляжных Видов Спорта "ZEUS" приглашает вас на групповые и индивидуальные тренировки разного уровня:
+</h2>
+
+<div class="container">
+	<div class="row" style="justify-content: center; gap: 50px; margin-bottom: 50px;">
+	<div class="card mycard">
+		<img src="{% static 'img/new.svg' %}" class="card-img-top" alt="...">
+		<div class="card-body">
+		<h5 class="card-title">Начальный уровень</h5>
+		<p class="card-text">Никогда не держал мяч в руках, но очень хочу. Подходит для любого уровня физической подготовки. Начнем с самых азов и поможем вам полюбить этот прекрасный вид спорта.</p>
+		<a href="#" class="btn btn-primary">Записаться!</a>
+		</div>
+	</div>
+	<div class="card mycard">
+		<img src="{% static 'img/middle.svg' %}" class="card-img-top" alt="...">
+		<div class="card-body">
+		<h5 class="card-title">Средний уровень</h5>
+		<p class="card-text">Знаю основы, играл в школе или институте. Научим правильно двигаться, подходить к мячу и обрабатывать его. При старании быстро начнёте играть в пляжный волейбол!</p>
+		<a href="#" class="btn btn-primary">Записаться!</a>
+		</div>
+	</div>
+	<div class="card mycard">
+		<img src="{% static 'img/profi.svg' %}" class="card-img-top" alt="...">
+		<div class="card-body">
+		<h5 class="card-title">Продвинутый уровень</h5>
+		<p class="card-text">Тренировался достаточно, чтобы удерживать мяч в игре, но хочу и играть лучше. Мы поможем вам поправить те элементы, которые у вас получаются с трудом.</p>
+		<a href="#" class="btn btn-primary">Записаться!</a>
+		</div>
+	</div>
+	</div>
+</div>
 
 
 
+<style>
+.mycard{
+	text-align: center;
+	border-radius: 20px;
+	width: 330px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	transition: transform 0.2s ease-in-out;
+}
+
+.mycard:hover{
+	
+    transform: translateY(-3px);
+    background-color: #f5f5f5;
+}
 
 
+.mycard p{
+	font-size: 18px;
+}
 
+.mycard h5{
+	font-size: 23px;
+	margin-bottom: 15px;
+}
+
+.btn{
+	font-size: 20px;
+}
+</style>
 
 
 

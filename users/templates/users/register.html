@@ -42,18 +42,23 @@
 
 		<!-- First Name input field -->
 		<div class="form-group">
-			<label for="first_name">First name</label>
+			<label for="first_name">Имя</label>
 			<input type="text" class="form-control" id="first_name" aria-describedby="emailHelp"
 			       placeholder="Enter First name" name="first_name" required>
 		</div>
 
 		<!-- Last Name input field -->
 		<div class="form-group">
-			<label for="last_name">Last name</label>
+			<label for="last_name">Фамилия</label>
 			<input type="text" name="last_name" class="form-control" id="last_name"
 			       aria-describedby="emailHelp" placeholder="Enter Last name" required>
 		</div>
 
+		<div class="form-group">
+			<label for="email">Ваша почта</label>
+			<input type="email" name="email" class="form-control" id="email"
+			       aria-describedby="emailHelp" placeholder="Enter your email" required>
+		</div>
 		<!-- Username input field -->
 		<div class="form-group">
 			<label for="user_name">Username</label>
@@ -69,7 +74,7 @@
 		</div>
 
 		<!-- Link to login page for users who already have an account -->
-		<p>Already have an account <a href="{% url 'users:login' %}">Login</a></p>
+		<p>Already have an account? <a href="{% url 'users:login' %}">Login</a></p>
 
 		<!-- Submit button -->
 		<button type="submit" class="btn btn-dark">Submit</button>
