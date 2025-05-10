@@ -22,13 +22,14 @@ from django.urls import path, include
 from django.conf import settings  # Импортируем настройки проекта
 from django.conf.urls.static import static  # Импортируем функцию static для работы со статическими файлами
 
-from zeus_app.views import show_main_page, show_trainings, show_bookings, show_booking_rules
+from zeus_app.views import show_main_page, show_trainings, show_bookings, show_booking_rules, trainings_light
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', show_main_page),
     path('bookings/', show_bookings),
     path('trainings/', show_trainings),
+    path('trainings/light/', trainings_light),
     path('booking_rules/', show_booking_rules),
     path('user/', include('users.urls', namespace='users')),
 

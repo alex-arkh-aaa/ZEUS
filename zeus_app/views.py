@@ -23,7 +23,7 @@ def show_booking_rules(request):
     return render(request, 'booking_rules.html')
 
 def trainings_light(request):
-    return render(request, '')
+    return render(request, 'trainings_light.html')
 
 
 def post_comment(request):
