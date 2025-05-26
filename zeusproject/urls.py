@@ -37,7 +37,7 @@ urlpatterns = [
     path('trainings/light/', trainings_light, name='trainings_light'),
     path('trainings/medium/', trainings_medium, name='trainings_medium'),
     path('trainings/hard/', trainings_hard, name='trainings_hard'),
-    path('booking_rules/', show_booking_rules),
+    path('booking_rules/', show_booking_rules, name='booking_rules'),
     path('user/', include('users.urls', namespace='users')),
 ]
 
