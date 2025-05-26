@@ -26,15 +26,19 @@ from zeus_app.views import show_main_page, show_trainings, show_bookings, show_b
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', show_main_page),
-    path('bookings/', show_bookings),
+    path('', show_main_page, name='main_page'),
+
+    # Pay attention to the order: more specific URL should go before less specific URL
+    path('bookings/<int:week_offset>/', show_bookings, name='booking_table_with_offset'),
+    path('bookings/', show_bookings, name='bookings'),
+
+
     path('trainings/', show_trainings),
     path('trainings/light/', trainings_light, name='trainings_light'),
     path('trainings/medium/', trainings_medium, name='trainings_medium'),
     path('trainings/hard/', trainings_hard, name='trainings_hard'),
     path('booking_rules/', show_booking_rules),
     path('user/', include('users.urls', namespace='users')),
-
 ]
 
 if settings.DEBUG:  # Если включен режим отладки (DEBUG=True)

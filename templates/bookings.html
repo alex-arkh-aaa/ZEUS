@@ -1,2 +1,115 @@
 {% extends "base.html" %}
-{% block title %}Бронирование корта{% endblock title %}
+{% block title %}О центре{% endblock title %}
+{% block links %}<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">{% endblock links %}
+{% load static %}
+
+{% block main%}
+
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}">
+    {{ message }}
+</div>
+{% endfor %}
+
+<h1 style="text-align: center;">Таблица бронирований</h1>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Время</th>
+            {% for day in days %}
+                <th>{{ day }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for time_slot in time_slots %}
+            <tr>
+                <td>{{ time_slot }}</td>
+                {% for day in days %}
+                    <td>
+                        {% for court_choice in courts %}
+                            {% with court_id=court_choice.0 %}
+                                {% for item in table_data %}
+                                    {% if item.day == day and item.time_slot == time_slot and item.court_id == court_id %}
+                                        <div class="inline-container">Корт №{{ item.court_id }}
+                                            {% if item.available %}
+                                                {% if request.user.is_authenticated %}
+                                                    <form method="post" action="{% url 'bookings' %}">
+                                                        {% csrf_token %}
+                                                            <input type="hidden" name="court_id" value="{{ item.court_id }}">
+                                                            <input type="hidden" name="booking_datetime" value="{{ item.day }} {{ item.time_slot }}">
+                                                            <input type="hidden" name="price" value="{{ item.price }}"> 
+                                                        <button type="submit" class="booking-button">
+                                                            {{ item.price }} р
+                                                        </button>
+                                                    </form>
+                                                {% else %}
+                                                    <span>Чтобы забронировать корт, пожалуйста, <a href="{% url 'users:login' %}">войдите в систему</a>.</span>
+                                                {% endif %}
+                                            {% else %}
+                                                <button class="booked" disabled>Занято</button>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endwith %}
+                        {% endfor %}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .booked {
+        text-decoration: none;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 5px 10px;
+    margin: 2px 5px;
+    border-radius: 8px;
+    background-color: #ff5c5c;
+    transition: background-color 0.3s ease;
+    }
+    .available {
+        background-color: #ccffcc; /* Зеленый цвет для доступных */
+    }
+    .booking-button {
+        text-decoration: none;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 5px 10px;
+    margin: 2px 5px;
+    border-radius: 8px;
+    background-color: #000000;
+    transition: background-color 0.3s ease;
+    }
+
+    .inline-container {
+        display: flex; /* Use flexbox for inline arrangement */
+        align-items: center; /* Vertically align items */
+        justify-content: center; /* Horizontally align items */
+    }
+</style>
+
+
+
+
+{% endblock main%}

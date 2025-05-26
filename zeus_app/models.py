@@ -13,12 +13,12 @@ class Booking(models.Model):
     '''Класс для бронирования корта. Связан с юзером, связан с CourtTimePrice по id и подгружет цену'''
     user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     court_id = models.IntegerField(choices=[(1, 'Желтый корт № 1'), (2, 'Синий корт № 2'), (3, 'Оранжевый корт № 3')])
-    bookind_datetime = models.DateTimeField()
+    booking_datetime = models.DateTimeField()
     status = models.CharField()
     price = models.IntegerField()
 
     def __str__(self):
-        return f'User_id - {self.user_id}, время - {self.bookind_datetime}, court_id - {self.court_id}, статус - {self.status}'
+        return f'User_id - {self.user_id}, время - {self.booking_datetime}, court_id - {self.court_id}, статус - {self.status}'
 
 
 class Comment(models.Model):
@@ -35,12 +35,27 @@ class Comment(models.Model):
 class CourtTimePrice(models.Model):
     '''Класс для админа. Выставляет цену на корт в каждое время каждого дня.
     Далее данные подгружаются и используется цена для бронирования'''
-    week_day = models.IntegerField(choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'), (6, '6'), (7, '7')])
-    time = models.TimeField()
+    WEEKDAY_CHOICES = [
+        ('Понедельник', 'Понедельник'),
+        ('Вторник', 'Вторник'),
+        ('Среда', 'Среда'),
+        ('Четверг', 'Четверг'),
+        ('Пятница', 'Пятница'),
+        ('Суббота', 'Суббота'),
+        ('Воскресенье', 'Воскресенье'),
+    ]
+    time_choices = [('06:00', '06:00'), ('08:00', '08:00'), ('10:00', '10:00'), ('12:00', '12:00'), ('14:00', '14:00'), 
+                    ('16:00', '16:00'), ('18:00', '18:00'), ('20:00', '20:00'), ('22:00', '22:00')]
+
+    week_day = models.CharField(choices=WEEKDAY_CHOICES)
+    time = models.CharField(choices=time_choices, default='00:00')
     price = models.IntegerField()
 
     def __str__(self):
-        return f'{self.week_day} день недели, {self.time} - {self.price}'
+        formatted_time = self.time.zfill(5)  # Add leading zero if needed
+
+        print(self.time)
+        return f'{self.week_day}, {formatted_time} - {self.price} руб.'
     
 
 
