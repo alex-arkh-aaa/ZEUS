@@ -4,6 +4,8 @@ from django.core.validators import MinLengthValidator
 from django.db import models
 from django.core.exceptions import ValidationError
 from users.models import User
+from datetime import date
+
 # Create your models here.
 
 
@@ -45,11 +47,20 @@ class CourtTimePrice(models.Model):
 class Trainings(models.Model):
     '''Класс предназначен для админов(тренеров). При планировании класса админ создает новую запись, после чего в таблице 
     AllTrainingSlots создается 8 новых записей, которые можно будет занять юзерам на странице сайта 'Тренировки' '''
+    time_choices = [('10:00', '10:00'), ('11:00', '11:00'), ('12:00', '12:00'), ('13:00', '13:00'),
+                    ('14:00', '14:00'), ('15:00', '15:00'), ('16:00', '16:00'), ('17:00', '17:00'),
+                    ('18:00', '18:00'), ('19:00', '19:00'), ('20:00', '20:00'), ('21:00', '21:00')]
+    
+
     trainer_name = models.CharField(choices=[('Александр Игнатов', 'Саша'), ('Анастасия Бунарева', 'Настя')])
-    start_datetime = models.DateTimeField()
+    level = models.CharField(choices=[('light', 'Начальный'), ('medium', 'Уверенный'), ('hard', 'Продвинутый')], default='light')
+    date = models.DateField(default=date.today)
+    time = models.CharField(choices=time_choices, default='00:00') 
     
     def __str__(self):
-        return f'{self.start_datetime}, тренер - {self.trainer_name}'
+        # date_str = self.date.strftime('%Y-%m-%d')  # Форматируем дату
+        # time_str = self.time.strftime('%H:%M')     # Форматируем время
+        return f'Время: {self.time}, Дата: {self.date}, Тренер: {self.trainer_name}, уровень: {self.level}'
     
 
 class AllTrainingSlots(models.Model):

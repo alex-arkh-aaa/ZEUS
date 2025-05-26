@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% block title %}Начальный уровень{% endblock title %}
+{% block title %}Средний уровень{% endblock title %}
 {% load static %}
 
 {% block main%}
 <h2 style="text-align: center;
 margin-block: 20px 40px;
 line-height: 45px;
-font-weight:bold;">Начальный уровень</h2>
+font-weight:bold;">Средний уровень</h2>
 <!-- <h1 class="centered-title" style="max-width: 660px; text-align: center; background: black;border-radius: 100px;margin: 10px auto;padding-block: 19px; color: white;">Школа пляжного волейбола «ЗЕВС»</h1> -->
 {% for message in messages %}
 <div class="alert alert-{{ message.tags }}">
@@ -32,7 +32,7 @@ font-weight:bold;">Начальный уровень</h2>
             ">Свободных мест: {{ training.free_slots }}/8</p>
             </div>
             <div class="col-md-4 text-right">  <!-- Колонка для кнопки (4 из 12) -->
-                <form method="POST" action="{% url 'trainings_light' %}">
+                <form method="POST" action="{% url 'trainings_medium' %}">
                     {% csrf_token %}
                     <input type="hidden" name="training_id" value="{{ training.id }}">
                     

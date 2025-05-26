@@ -8,7 +8,7 @@
 }
 
 /* Стили для ссылок (общие) */
-a, input {
+a, input, button {
     text-decoration: none;
     color: #ffffff;
     font-size: 16px;
@@ -21,7 +21,7 @@ a, input {
 
 /* Стили для ссылок при наведении */
 .main-nav a:hover {
-    background-color: #bbb;
+    background-color: #5c5c5c;
 }
 
 /* Стили для параграфов */
