@@ -41,12 +41,12 @@
                                                             <input type="hidden" name="court_id" value="{{ item.court_id }}">
                                                             <input type="hidden" name="booking_datetime" value="{{ item.day }} {{ item.time_slot }}">
                                                             <input type="hidden" name="price" value="{{ item.price }}"> 
-                                                        <button type="submit" class="booking-button">
-                                                            {{ item.price }} р
-                                                        </button>
+                                                            <button type="button" class="booking-button">
+                                                                {{ item.price }} р
+                                                              </button>
                                                     </form>
                                                 {% else %}
-                                                    <span>Чтобы забронировать корт, пожалуйста, <a href="{% url 'users:login' %}">войдите в систему</a>.</span>
+                                                    <span><a href="{% url 'users:login' %}">войдите в аккаунт</a>.</span>
                                                 {% endif %}
                                             {% else %}
                                                 <button class="booked" disabled>Занято</button>
@@ -62,6 +62,7 @@
         {% endfor %}
     </tbody>
 </table>
+
 
 
 
@@ -110,6 +111,118 @@
 </style>
 
 
+<div id="bookingModal" class="modal">
+    <div class="modal-content">
+      <p id="modalText"></p>
+      <div class="modal-buttons">
+        <button id="confirmBooking" class="btn-confirm">Оплатить</button>
+        <button id="cancelBooking" class="btn-cancel">Отмена</button>
+      </div>
+    </div>
+  </div>
 
+  <style>
+    /* Стили для модального окна */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+    
+    .modal-content {
+      background-color: #fff;
+      margin: 15% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+    }
+    
+    .modal-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    /* .btn-confirm {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    } */
+    
+    /* .btn-cancel {
+      background-color: #f44336;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    } */
+  </style>
 
+<script>
+    // Переменные для хранения данных формы
+    let currentForm = null;
+    
+    // Обработчик для всех кнопок бронирования
+    document.addEventListener('DOMContentLoaded', function() {
+      const bookingButtons = document.querySelectorAll('.booking-button');
+      const modal = document.getElementById('bookingModal');
+      const modalText = document.getElementById('modalText');
+      const confirmBtn = document.getElementById('confirmBooking');
+      const cancelBtn = document.getElementById('cancelBooking');
+      
+      bookingButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Сохраняем форму
+          currentForm = this.closest('form');
+          
+          // Получаем данные из формы
+          const courtId = currentForm.querySelector('input[name="court_id"]').value;
+          const bookingDatetime = currentForm.querySelector('input[name="booking_datetime"]').value;
+          const price = currentForm.querySelector('input[name="price"]').value;
+          
+          // Устанавливаем текст в модальном окне
+          modalText.textContent = `Вы бронируете корт №${courtId} в ${bookingDatetime} ${this.textContent.trim()}`;
+          
+          // Показываем модальное окно
+          modal.style.display = 'block';
+        });
+      });
+      
+      // Подтверждение бронирования
+      confirmBtn.addEventListener('click', function() {
+        if (currentForm) {
+          currentForm.submit();
+        }
+        modal.style.display = 'none';
+      });
+      
+      // Отмена бронирования
+      cancelBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+        currentForm = null;
+      });
+      
+      // Закрытие модального окна при клике вне его
+      window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+          currentForm = null;
+        }
+      });
+    });
+  </script>  
 {% endblock main%}

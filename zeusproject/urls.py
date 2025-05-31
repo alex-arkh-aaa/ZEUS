@@ -31,8 +31,6 @@ urlpatterns = [
     # Pay attention to the order: more specific URL should go before less specific URL
     path('bookings/<int:week_offset>/', show_bookings, name='booking_table_with_offset'),
     path('bookings/', show_bookings, name='bookings'),
-
-
     path('trainings/', show_trainings),
     path('trainings/light/', trainings_light, name='trainings_light'),
     path('trainings/medium/', trainings_medium, name='trainings_medium'),
