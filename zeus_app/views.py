@@ -23,39 +23,26 @@ def show_bookings(request, week_offset=0):
         court_id = request.POST.get('court_id')
         booking_datetime_str = request.POST.get('booking_datetime')
         price = request.POST.get('price')
-
-        print(f"court_id: {court_id}, booking_datetime_str: {booking_datetime_str}, price: {price}")
-
         booking_datetime = None
-
         try:
             booking_datetime = datetime.strptime(booking_datetime_str, '%Y-%m-%d %H:%M')            
             price = float(price)
-            print(f"booking_datetime: {booking_datetime}, price: {price}")
         except (ValueError, TypeError) as e:
-            print(f"Error during conversion: {e}")
             messages.error(request, "Неверный формат даты, времени или цены.")
-            #return redirect('your_booking_table_url')
-
         if booking_datetime is None:
             messages.error(request, "Не удалось обработать дату и время бронирования.")
-            #return redirect('your_booking_table_url')
-
         user_id = request.user
-
         try:
             booking = Booking(
                 user_id=user_id,
                 court_id=court_id,
                 booking_datetime=booking_datetime,
-                status='Подтверждено',  # Обязательно! Укажи значение для status
+                status='Подтверждено',
                 price=price
             )
-
             booking.save()
             messages.success(request, "Корт успешно забронирован!")
             
-            #return redirect('your_booking_table_url')
         except Exception as e:
             print(f"Error during saving: {e}")
             messages.error(request, f"Произошла ошибка при сохранении бронирования: {e}")
@@ -181,12 +168,14 @@ def trainings_hard(request):
 def booking_table(request, week_offset=0):
     """Отображает таблицу бронирований на неделю со смещением."""
     week_offset = int(week_offset)
-
+    print(week_offset)
     # 1. Определяем текущую неделю со смещением
     today = date.today()
     start_date = today + timedelta(days=-today.weekday(), weeks=week_offset)
     end_date = start_date + timedelta(days=6)
     days = [(start_date + timedelta(days=i)).strftime('%Y-%m-%d') for i in range(7)]
+    print(days)
+
 
     # 2. Получаем временные слоты из базы данных (CourtTimePrice)
     time_slots_data = CourtTimePrice.objects.values('time').distinct().order_by('time')
@@ -321,7 +310,6 @@ def get_upcoming_trainings_with_slots(level):
         
         # Предполагаем, что всего 8 слотов на тренировку
         training.free_slots = 8 - booked_slots
-        print(booked_slots)
     
     return upcoming_trainings
 

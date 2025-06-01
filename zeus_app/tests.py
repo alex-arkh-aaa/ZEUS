@@ -33,42 +33,7 @@ class BookingModelTest(TestCase):
         self.assertIsInstance(booking, Booking)
         self.assertEqual(booking.__str__(), f'User_id - {self.user}, время - {booking.booking_datetime}, court_id - 1, статус - Подтверждено')
 
-    def test_booking_creation_3(self):
-        """Test booking model creation"""
-        booking = Booking.objects.create(
-            user_id=self.user,
-            court_id=1,
-            booking_datetime=datetime.datetime.now(),
-            status='Подтверждено',
-            price=100
-        )
-        self.assertIsInstance(booking, Booking)
-        self.assertEqual(booking.__str__(), f'User_id - {self.user}, время - {booking.booking_datetime}, court_id - 1, статус - Подтверждено')
-
-    def test_booking_creation_4(self):
-        """Test booking model creation"""
-        booking = Booking.objects.create(
-            user_id=self.user,
-            court_id=1,
-            booking_datetime=datetime.datetime.now(),
-            status='Подтверждено',
-            price=100
-        )
-        self.assertIsInstance(booking, Booking)
-        self.assertEqual(booking.__str__(), f'User_id - {self.user}, время - {booking.booking_datetime}, court_id - 1, статус - Подтверждено')
-
-    def test_booking_creation_5(self):
-        """Test booking model creation"""
-        booking = Booking.objects.create(
-            user_id=self.user,
-            court_id=1,
-            booking_datetime=datetime.datetime.now(),
-            status='Подтверждено',
-            price=100
-        )
-        self.assertIsInstance(booking, Booking)
-        self.assertEqual(booking.__str__(), f'User_id - {self.user}, время - {booking.booking_datetime}, court_id - 1, статус - Подтверждено')
-
+    
 class CommentModelTest(TestCase):
     def setUp(self):
         # Create a user for testing purposes
@@ -85,36 +50,6 @@ class CommentModelTest(TestCase):
         self.assertEqual(comment.__str__(), f'User_id - {self.user}, оценка - {5}, дата - {comment.created_at}')
 
     def test_comment_creation_2(self):
-        """Test comment model creation"""
-        comment = Comment.objects.create(
-            user_id=self.user,
-            rating_value=5,
-            text='Отличный корт!'
-        )
-        self.assertIsInstance(comment, Comment)
-        self.assertEqual(comment.__str__(), f'User_id - {self.user}, оценка - {5}, дата - {comment.created_at}')
-
-    def test_comment_creation_3(self):
-        """Test comment model creation"""
-        comment = Comment.objects.create(
-            user_id=self.user,
-            rating_value=5,
-            text='Отличный корт!'
-        )
-        self.assertIsInstance(comment, Comment)
-        self.assertEqual(comment.__str__(), f'User_id - {self.user}, оценка - {5}, дата - {comment.created_at}')
-
-    def test_comment_creation_4(self):
-        """Test comment model creation"""
-        comment = Comment.objects.create(
-            user_id=self.user,
-            rating_value=5,
-            text='Отличный корт!'
-        )
-        self.assertIsInstance(comment, Comment)
-        self.assertEqual(comment.__str__(), f'User_id - {self.user}, оценка - {5}, дата - {comment.created_at}')
-
-    def test_comment_creation_5(self):
         """Test comment model creation"""
         comment = Comment.objects.create(
             user_id=self.user,
@@ -146,36 +81,7 @@ class CourtTimePriceModelTest(TestCase):
         self.assertIsInstance(court_time_price, CourtTimePrice)
         self.assertEqual(court_time_price.__str__(), 'Понедельник, 06:00 - 500 руб.')
 
-    def test_court_time_price_creation_3(self):
-        """Test court time price model creation"""
-        court_time_price = CourtTimePrice.objects.create(
-            week_day='Понедельник',
-            time='06:00',
-            price=500
-        )
-        self.assertIsInstance(court_time_price, CourtTimePrice)
-        self.assertEqual(court_time_price.__str__(), 'Понедельник, 06:00 - 500 руб.')
-
-    def test_court_time_price_creation_4(self):
-        """Test court time price model creation"""
-        court_time_price = CourtTimePrice.objects.create(
-            week_day='Понедельник',
-            time='06:00',
-            price=500
-        )
-        self.assertIsInstance(court_time_price, CourtTimePrice)
-        self.assertEqual(court_time_price.__str__(), 'Понедельник, 06:00 - 500 руб.')
-
-    def test_court_time_price_creation_5(self):
-        """Test court time price model creation"""
-        court_time_price = CourtTimePrice.objects.create(
-            week_day='Понедельник',
-            time='06:00',
-            price=500
-        )
-        self.assertIsInstance(court_time_price, CourtTimePrice)
-        self.assertEqual(court_time_price.__str__(), 'Понедельник, 06:00 - 500 руб.')
-
+    
 
 class TrainingsModelTest(TestCase):
     def test_trainings_creation(self):
@@ -189,36 +95,6 @@ class TrainingsModelTest(TestCase):
         self.assertIsInstance(training, Trainings)
 
     def test_trainings_creation_2(self):
-        """Test trainings model creation"""
-        training = Trainings.objects.create(
-            trainer_name='Александр Игнатов',
-            level='light',
-            date=datetime.date.today(),
-            time='10:00'
-        )
-        self.assertIsInstance(training, Trainings)
-
-    def test_trainings_creation_3(self):
-        """Test trainings model creation"""
-        training = Trainings.objects.create(
-            trainer_name='Александр Игнатов',
-            level='light',
-            date=datetime.date.today(),
-            time='10:00'
-        )
-        self.assertIsInstance(training, Trainings)
-
-    def test_trainings_creation_4(self):
-        """Test trainings model creation"""
-        training = Trainings.objects.create(
-            trainer_name='Александр Игнатов',
-            level='light',
-            date=datetime.date.today(),
-            time='10:00'
-        )
-        self.assertIsInstance(training, Trainings)
-
-    def test_trainings_creation_5(self):
         """Test trainings model creation"""
         training = Trainings.objects.create(
             trainer_name='Александр Игнатов',
@@ -252,39 +128,7 @@ class AllTrainingSlotsModelTest(TestCase):
         self.assertIsInstance(all_training_slots, AllTrainingSlots)
         self.assertEqual(all_training_slots.__str__(), 'Номер тренировки: 1, Место: 1, user_id: 1')
 
-    def test_all_training_slots_creation_3(self):
-        """Test all training slots model creation"""
-        all_training_slots = AllTrainingSlots.objects.create(
-            training_id=1,
-            slot_number=1,
-            user_id=1,
-            status=1
-        )
-        self.assertIsInstance(all_training_slots, AllTrainingSlots)
-        self.assertEqual(all_training_slots.__str__(), 'Номер тренировки: 1, Место: 1, user_id: 1')
-
-    def test_all_training_slots_creation_4(self):
-        """Test all training slots model creation"""
-        all_training_slots = AllTrainingSlots.objects.create(
-            training_id=1,
-            slot_number=1,
-            user_id=1,
-            status=1
-        )
-        self.assertIsInstance(all_training_slots, AllTrainingSlots)
-        self.assertEqual(all_training_slots.__str__(), 'Номер тренировки: 1, Место: 1, user_id: 1')
-
-    def test_all_training_slots_creation_5(self):
-        """Test all training slots model creation"""
-        all_training_slots = AllTrainingSlots.objects.create(
-            training_id=1,
-            slot_number=1,
-            user_id=1,
-            status=1
-        )
-        self.assertIsInstance(all_training_slots, AllTrainingSlots)
-        self.assertEqual(all_training_slots.__str__(), 'Номер тренировки: 1, Место: 1, user_id: 1')
-
+    
 class ShowBookingsViewTest(TestCase):
     def setUp(self):
         # Create a client for sending requests
@@ -315,39 +159,6 @@ class ShowBookingsViewTest(TestCase):
         # Check that the view uses the correct template
         self.assertTemplateUsed(response, 'bookings.html')
 
-    def test_show_bookings_view_3(self):
-        """Test show bookings view"""
-        # Get the URL for the show_bookings view
-        url = reverse('bookings')  # Assuming 'bookings' is the correct name
-        # Send a GET request to this URL
-        response = self.client.get(url)
-        # Check that the view returned HTTP code 200 (successful request)
-        self.assertEqual(response.status_code, 200)
-        # Check that the view uses the correct template
-        self.assertTemplateUsed(response, 'bookings.html')
-
-    def test_show_bookings_view_4(self):
-        """Test show bookings view"""
-        # Get the URL for the show_bookings view
-        url = reverse('bookings')  # Assuming 'bookings' is the correct name
-        # Send a GET request to this URL
-        response = self.client.get(url)
-        # Check that the view returned HTTP code 200 (successful request)
-        self.assertEqual(response.status_code, 200)
-        # Check that the view uses the correct template
-        self.assertTemplateUsed(response, 'bookings.html')
-
-    def test_show_bookings_view_5(self):
-        """Test show bookings view"""
-        # Get the URL for the show_bookings view
-        url = reverse('bookings')  # Assuming 'bookings' is the correct name
-        # Send a GET request to this URL
-        response = self.client.get(url)
-        # Check that the view returned HTTP code 200 (successful request)
-        self.assertEqual(response.status_code, 200)
-        # Check that the view uses the correct template
-        self.assertTemplateUsed(response, 'bookings.html')
-
 class MainPageViewTest(TestCase):
     def test_main_page_view(self):
         """Test main page view"""
@@ -363,26 +174,6 @@ class MainPageViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'main_page.html')
 
-    def test_main_page_view_3(self):
-        """Test main page view"""
-        url = reverse('main_page')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'main_page.html')
-
-    def test_main_page_view_4(self):
-        """Test main page view"""
-        url = reverse('main_page')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'main_page.html')
-
-    def test_main_page_view_5(self):
-        """Test main page view"""
-        url = reverse('main_page')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'main_page.html')
 
 class ShowTrainingsViewTest(TestCase):
     def test_show_trainings_view(self):
@@ -393,27 +184,6 @@ class ShowTrainingsViewTest(TestCase):
         self.assertTemplateUsed(response, 'trainings_light.html')
 
     def test_show_trainings_view_2(self):
-        """Test show trainings view"""
-        url = reverse('trainings_light')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'trainings_light.html')
-
-    def test_show_trainings_view_3(self):
-        """Test show trainings view"""
-        url = reverse('trainings_light')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'trainings_light.html')
-
-    def test_show_trainings_view_4(self):
-        """Test show trainings view"""
-        url = reverse('trainings_light')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'trainings_light.html')
-
-    def test_show_trainings_view_5(self):
         """Test show trainings view"""
         url = reverse('trainings_light')
         response = self.client.get(url)
@@ -434,27 +204,6 @@ class ShowTrainingsViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'trainings_medium.html')
 
-    def test_trainings_medium_view_3(self):
-        """Test show trainings view"""
-        url = reverse('trainings_medium')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'trainings_medium.html')
-
-    def test_trainings_medium_view_4(self):
-        """Test show trainings view"""
-        url = reverse('trainings_medium')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'trainings_medium.html')
-
-    def test_trainings_medium_view_5(self):
-        """Test show trainings view"""
-        url = reverse('trainings_medium')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'trainings_medium.html')
-
     def test_trainings_hard_view(self):
         """Test show trainings view"""
         url = reverse('trainings_hard')
@@ -469,26 +218,6 @@ class ShowTrainingsViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'trainings_hard.html')
 
-    def test_trainings_hard_view_3(self):
-        """Test show trainings view"""
-        url = reverse('trainings_hard')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'trainings_hard.html')
-
-    def test_trainings_hard_view_4(self):
-        """Test show trainings view"""
-        url = reverse('trainings_hard')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'trainings_hard.html')
-
-    def test_trainings_hard_view_5(self):
-        """Test show trainings view"""
-        url = reverse('trainings_hard')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'trainings_hard.html')
 
 class ShowBookingRulesViewTest(TestCase):
     def test_show_booking_rules_view(self):
@@ -505,27 +234,7 @@ class ShowBookingRulesViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'booking_rules.html')
 
-    def test_show_booking_rules_view_3(self):
-        """Test show booking rules view"""
-        url = reverse('booking_rules')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'booking_rules.html')
-
-    def test_show_booking_rules_view_4(self):
-        """Test show booking rules view"""
-        url = reverse('booking_rules')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'booking_rules.html')
-
-    def test_show_booking_rules_view_5(self):
-        """Test show booking rules view"""
-        url = reverse('booking_rules')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'booking_rules.html')
-
+    
 class UsersViewTest(TestCase): # Add user-related test
     def setUp(self):
         self.client = Client()
@@ -544,27 +253,7 @@ class UsersViewTest(TestCase): # Add user-related test
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'users/login.html')
 
-    def test_login_page_view_3(self):
-        """Test login page view"""
-        url = reverse('users:login')  # Corrected namespacing
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'users/login.html')
-
-    def test_login_page_view_4(self):
-        """Test login page view"""
-        url = reverse('users:login')  # Corrected namespacing
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'users/login.html')
-
-    def test_login_page_view_5(self):
-        """Test login page view"""
-        url = reverse('users:login')  # Corrected namespacing
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'users/login.html')
-
+    
     def test_register_page_view(self):
         """Test register page view"""
         url = reverse('users:register')  # Corrected namespacing
@@ -579,23 +268,4 @@ class UsersViewTest(TestCase): # Add user-related test
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'users/register.html')
 
-    def test_register_page_view_3(self):
-        """Test register page view"""
-        url = reverse('users:register')  # Corrected namespacing
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'users/register.html')
-
-    def test_register_page_view_4(self):
-        """Test register page view"""
-        url = reverse('users:register')  # Corrected namespacing
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'users/register.html')
-
-    def test_register_page_view_5(self):
-        """Test register page view"""
-        url = reverse('users:register')  # Corrected namespacing
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'users/register.html')
+    

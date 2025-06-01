@@ -18,7 +18,7 @@ from xml.etree.ElementInclude import include
 #django_auth/urls.py
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings  # Импортируем настройки проекта
 from django.conf.urls.static import static  # Импортируем функцию static для работы со статическими файлами
 
@@ -29,7 +29,8 @@ urlpatterns = [
     path('', show_main_page, name='main_page'),
 
     # Pay attention to the order: more specific URL should go before less specific URL
-    path('bookings/<int:week_offset>/', show_bookings, name='booking_table_with_offset'),
+    #path('bookings/<int:week_offset>/', show_bookings, name='bookings_with_offset'),
+    re_path(r'bookings/(?P<week_offset>-?\d+)/', show_bookings, name='bookings_with_offset'),
     path('bookings/', show_bookings, name='bookings'),
     path('trainings/', show_trainings),
     path('trainings/light/', trainings_light, name='trainings_light'),

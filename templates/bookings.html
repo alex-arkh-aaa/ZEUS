@@ -11,15 +11,19 @@
 </div>
 {% endfor %}
 
-<h1 style="text-align: center;">Таблица бронирований</h1>
 
+<div style="display: flex; flex-direction: row; justify-content: space-around; align-items: center;">
+    <a href="{% url 'bookings_with_offset' week_offset=week_offset|add:-1 %}">&lt; Предыдущая неделя</a>
+    <h1 style="text-align: center;">Таблица бронирований</h1>
+    <a href="{% url 'bookings_with_offset' week_offset=week_offset|add:1 %}">Следующая неделя &gt;</a>
+</div>
 
 <table>
     <thead>
         <tr>
             <th>Время</th>
             {% for day in days %}
-                <th>{{ day }}</th>
+                <th id="date-{{ forloop.counter }}"></th>
             {% endfor %}
         </tr>
     </thead>
@@ -36,7 +40,7 @@
                                         <div class="inline-container">Корт №{{ item.court_id }}
                                             {% if item.available %}
                                                 {% if request.user.is_authenticated %}
-                                                    <form method="post" action="{% url 'bookings' %}">
+                                                    <form method="post" action="{% url 'bookings_with_offset' week_offset=week_offset %}">
                                                         {% csrf_token %}
                                                             <input type="hidden" name="court_id" value="{{ item.court_id }}">
                                                             <input type="hidden" name="booking_datetime" value="{{ item.day }} {{ item.time_slot }}">
@@ -46,7 +50,7 @@
                                                               </button>
                                                     </form>
                                                 {% else %}
-                                                    <span><a href="{% url 'users:login' %}">войдите в аккаунт</a>.</span>
+                                                    <span><a href="{% url 'users:login' %}">Войдите в аккаунт</a>.</span>
                                                 {% endif %}
                                             {% else %}
                                                 <button class="booked" disabled>Занято</button>
@@ -225,4 +229,23 @@
       });
     });
   </script>  
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var days = {{ days|safe }};
+        console.log("Days array:", days); //  <-- ВАЖНО: временно добавьте это
+        for (var i = 0; i < days.length; i++) {
+            var dateString = days[i];
+            var date = new Date(dateString);
+            var options = { weekday: 'short', day: 'numeric', month: 'numeric', year: 'numeric' };
+            var formattedDate = date.toLocaleDateString('ru-RU', options);
+
+            var th = document.getElementById('date-' + (i + 1));
+            if (th) {
+                th.textContent = formattedDate;
+            }
+        }
+    });
+</script>
+
 {% endblock main%}
