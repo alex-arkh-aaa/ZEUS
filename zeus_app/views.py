@@ -1,10 +1,18 @@
 from datetime import datetime, timedelta, date
+import logging
 from django.shortcuts import render
 from .models import Comment, Booking, Trainings, AllTrainingSlots, CourtTimePrice
 from django.db.models import Q
 from django.contrib import messages
 
-# Create your views here.
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
+
+logger = logging.getLogger(__name__) # Настраиваем logger
+
+
 def show_main_page(request):
     if request.method == 'POST':
         post_comment(request)
@@ -15,14 +23,19 @@ def show_main_page(request):
 
 
 def show_trainings(request):
+    logger.info("Запрошена страница с информацией о тренировках")
     return render(request, 'trainings.html')
 
 
 def show_bookings(request, week_offset=0):
     if request.method == 'POST':
+        logger.info("Получен POST запрос для бронирования") # Логируем POST запрос
+
         court_id = request.POST.get('court_id')
         booking_datetime_str = request.POST.get('booking_datetime')
         price = request.POST.get('price')
+        logger.debug(f"Данные из POST запроса: court_id={court_id}, booking_datetime={booking_datetime_str}, price={price}")# Детали
+
         booking_datetime = None
         try:
             booking_datetime = datetime.strptime(booking_datetime_str, '%Y-%m-%d %H:%M')            
@@ -41,12 +54,13 @@ def show_bookings(request, week_offset=0):
                 price=price
             )
             booking.save()
+            logger.info(f"Успешно создано бронирование: {booking}") # Успех
+
             messages.success(request, "Корт успешно забронирован!")
             
         except Exception as e:
             print(f"Error during saving: {e}")
             messages.error(request, f"Произошла ошибка при сохранении бронирования: {e}")
-            #return redirect('your_booking_table_url')
 
 
     data = booking_table(request, week_offset)
@@ -55,14 +69,16 @@ def show_bookings(request, week_offset=0):
 
 
 def show_booking_rules(request):
+    logger.info("Запрошена страница с правилами бронирования")
 
     return render(request, 'booking_rules.html')
 
 def trainings_light(request):
+    logger.info("Запрошена страница с тренировками начального уровня")
+
     if request.method == 'POST':
         training_id = request.POST.get('training_id')
         user_id = request.user.id
-        
         try:
             training = Trainings.objects.get(id=training_id)
             
@@ -83,6 +99,8 @@ def trainings_light(request):
                     status=1,
                     slot_number=1
                 )
+                logger.info(f"Пользователь user_id={user_id} успешно записан на тренировку training_id={training_id}")
+
                 messages.success(request, 'Вы успешно записаны на тренировку!')
                 
         except Trainings.DoesNotExist:
@@ -94,6 +112,8 @@ def trainings_light(request):
     return render(request, 'trainings_light.html', context=data)
 
 def trainings_medium(request):
+    logger.info("Запрошена страница с тренировками среднего уровня")
+
     if request.method == 'POST':
         training_id = request.POST.get('training_id')
         user_id = request.user.id
@@ -118,6 +138,8 @@ def trainings_medium(request):
                     status=1,
                     slot_number=1
                 )
+                logger.info(f"Пользователь user_id={user_id} успешно записан на тренировку training_id={training_id}")
+
                 messages.success(request, 'Вы успешно записаны на тренировку!')
                 
         except Trainings.DoesNotExist:
@@ -129,6 +151,8 @@ def trainings_medium(request):
     return render(request, 'trainings_medium.html', context=data)
 
 def trainings_hard(request):
+    logger.info("Запрошена страница с тренировками продвинутого уровня")
+
     if request.method == 'POST':
         training_id = request.POST.get('training_id')
         user_id = request.user.id
@@ -153,6 +177,8 @@ def trainings_hard(request):
                     status=1,
                     slot_number=1
                 )
+                logger.info(f"Пользователь user_id={user_id} успешно записан на тренировку training_id={training_id}")
+
                 messages.success(request, 'Вы успешно записаны на тренировку!')
                 
         except Trainings.DoesNotExist:
@@ -166,6 +192,8 @@ def trainings_hard(request):
 
 
 def booking_table(request, week_offset=0):
+    logger.info(f"Запрошена страница с информациях о бронированиях со смещением недели - {week_offset}")
+
     """Отображает таблицу бронирований на неделю со смещением."""
     week_offset = int(week_offset)
     print(week_offset)
@@ -239,6 +267,7 @@ def booking_table(request, week_offset=0):
         # Mark as unavailable if court is booked
         if bookings_count >= 1:
             item['available'] = False
+
         
 
     # 6. Передаем данные
@@ -254,23 +283,8 @@ def booking_table(request, week_offset=0):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def post_comment(request):
+    logger.info("Попытка добавить новый комментарий")
 
     print('post comment')
     comment_text = request.POST.get('comment')
@@ -290,6 +304,8 @@ def post_comment(request):
     # Создаем и сохраняем комментарий
     comment = Comment(user_id = request.user, text = comment_text, rating_value = rating)
     comment.save()
+    logger.info(f"Успешно добавлен комментарий: {comment}")
+
 
 def get_upcoming_trainings_with_slots(level):
     # Получаем текущую дату и время

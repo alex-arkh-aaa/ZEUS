@@ -1,0 +1,112 @@
+/* Общие стили для навигации */
+.main-nav {
+    display: flex;
+    justify-content: space-between; /* Распределяет заголовок и auth-links по краям */
+    align-items: center;
+    padding: 10px;
+    border: 3px solid #ccc;
+}
+
+/* Стили для ссылок (общие) */
+a, input, button {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 8px 12px;
+    margin: 0 5px;
+    border-radius: 12px;
+    background-color: #000000;
+    transition: background-color 0.3s ease;
+}
+
+/* Стили для ссылок при наведении */
+.main-nav a:hover {
+    background-color: #5c5c5c;
+}
+
+/* Стили для параграфов */
+.main-nav p {
+    color: #000000;
+    margin: 0 5px;
+    padding: 8px 12px;
+    font-size: 20px;
+}
+
+/* Стили для блока auth-links */
+.auth-links {
+    display: flex;
+    align-items: center;
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+    .main-nav {
+        flex-direction: column;          /* Вертикальное расположение элементов */
+        align-items: stretch;           /* Растягиваем элементы на всю ширину */
+    }
+
+    .auth-links {
+        display: flex;                /* Выстраиваем элементы в ряд */
+        flex-direction: column;         /* Располагаем элементы друг под другом */
+        align-items: center;            /* Выравниваем по центру */
+        width: 100%;                    /* Занимает всю ширину */
+    }
+
+    .auth-links a,
+    .auth-links p {
+        display: block;               /* Растягиваем ссылки на всю ширину */
+        text-align: center;            /* Выравниваем текст по центру */
+        margin: 5px 0;                 /* Отступы сверху и снизу */
+    }
+}
+
+footer {
+    background-color: black;
+    color: #fff;
+    padding: 20px 0;
+    font-size: 18px;
+}
+
+footer h5 {
+    color: #fff;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+footer a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #fff;
+}
+
+footer .list-unstyled li {
+    margin-bottom: 5px;
+}
+
+footer .list-unstyled a i {
+    margin-right: 5px;
+}
+
+footer .text-center {
+    padding-top: 10px;
+    border-top: 1px solid #555;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+    footer {
+        text-align: center;
+    }
+    footer .col-md-4 {
+        margin-bottom: 20px;
+    }
+    footer .text-center {
+        padding-top: 20px;
+    }
+}
+

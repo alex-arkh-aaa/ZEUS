@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Login</title>
+	<title>Вход</title>
 	{% load static %}
 
 	<link rel="icon" href="{% static 'favicon/favicon.ico' %}" sizes="any">
@@ -31,7 +31,7 @@
 		{% csrf_token %}  <!-- CSRF token for security -->
 
 		<!-- Login heading -->
-		<h3>Login</h3>
+		<h3>Вход</h3>
 		<hr>
 
 		{% if messages %}
@@ -46,23 +46,23 @@
 
 		<!-- Username input field -->
 		<div class="form-group">
-			<label for="exampleInputEmail1">Username</label>
+			<label for="exampleInputEmail1">Ваш ник</label>
 			<input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp"
 			       placeholder="Enter username" required>
 		</div>
 
 		<!-- Password input field -->
 		<div class="form-group">
-			<label for="exampleInputPassword1">Password</label>
+			<label for="exampleInputPassword1">Пароль</label>
 			<input type="password" name="password" class="form-control" id="exampleInputPassword1"
 			       placeholder="Password" required>
 		</div>
 
 		<!-- Link to registration page -->
-		<p>Don't have an account? <a href="{% url 'users:register' %}">Register</a></p>
+		<p>У вас нет аккаунта?<a href="{% url 'users:register' %}">Зарегистрироваться</a></p>
 
 		<!-- Submit button -->
-		<button type="submit" class="btn btn-dark">Submit</button>
+		<button type="submit" class="btn btn-dark">Войти</button>
 	</form>
 </div>
 </body>

@@ -140,7 +140,7 @@ class ShowBookingsViewTest(TestCase):
     def test_show_bookings_view(self):
         """Test show bookings view"""
         # Get the URL for the show_bookings view
-        url = reverse('bookings')  # Assuming 'bookings' is the correct name
+        url = reverse('bookings_with_offset', kwargs={'week_offset': 0})
         # Send a GET request to this URL
         response = self.client.get(url)
         # Check that the view returned HTTP code 200 (successful request)
@@ -151,7 +151,7 @@ class ShowBookingsViewTest(TestCase):
     def test_show_bookings_view_2(self):
         """Test show bookings view"""
         # Get the URL for the show_bookings view
-        url = reverse('bookings')  # Assuming 'bookings' is the correct name
+        url = reverse('bookings_with_offset', kwargs={'week_offset': 0})
         # Send a GET request to this URL
         response = self.client.get(url)
         # Check that the view returned HTTP code 200 (successful request)
@@ -268,4 +268,4 @@ class UsersViewTest(TestCase): # Add user-related test
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'users/register.html')
 
-    
+
